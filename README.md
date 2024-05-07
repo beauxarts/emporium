@@ -1,2 +1,3 @@
 # emporium
-📚 Custom-made book shelf
+
+Custom-made book shelf
