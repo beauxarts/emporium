@@ -1,6 +1,6 @@
 backups
     /Volumes/appdata/emporium/backups
-share
-    /Volumes/appdata/emporium/share
+shares
+    /Volumes/appdata/emporium/shares
 metadata
     /Volumes/appdata/emporium/metadata

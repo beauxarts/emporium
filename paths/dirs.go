@@ -8,12 +8,12 @@ const DefaultEmporiumRootDir = "/usr/share/emporium"
 
 const (
 	Backups  pasu.AbsDir = "backups"
-	Share    pasu.AbsDir = "share"
+	Shares   pasu.AbsDir = "shares"
 	Metadata pasu.AbsDir = "metadata"
 )
 
 var AllAbsDirs = []pasu.AbsDir{
 	Backups,
-	Share,
+	Shares,
 	Metadata,
 }

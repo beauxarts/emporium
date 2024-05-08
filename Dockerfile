@@ -18,8 +18,8 @@ EXPOSE 1927
 
 # backups
 VOLUME /usr/share/emporium/backups
-# input
-VOLUME /usr/share/emporium/share
+# shares
+VOLUME /usr/share/emporium/shares
 # metadata
 VOLUME /usr/share/emporium/metadata
 
