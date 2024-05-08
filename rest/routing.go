@@ -15,7 +15,7 @@ func HandleFuncs() {
 		"GET /browse": Log(http.HandlerFunc(GetBrowse)),
 		"GET /file":   Log(http.HandlerFunc(GetFile)),
 
-		"GET /": Log(http.RedirectHandler("/", http.StatusPermanentRedirect)),
+		"GET /": Log(http.RedirectHandler("/browse", http.StatusPermanentRedirect)),
 	}
 
 	for p, h := range patternHandlers {

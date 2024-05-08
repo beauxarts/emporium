@@ -24,41 +24,49 @@
             }
 
             h1 {
-                font-size: var(--fs-normal);
+                font-size: var(--fs-xx-larger);
+                margin-block: var(--large);
             }
 
             ul {
                 list-style: none;
                 padding-inline-start: 0;
-                margin-inline-start: var(--normal);
                 display: flex;
                 flex-direction: column;
                 gap: var(--normal);
+
+                & li {
+                    background-color: var(--highlight-color);
+                    padding: var(--small);
+                    border-radius: var(--border-radius);
+
+                }
             }
 
-            details {
+            section {
                 content-visibility: auto;
             }
 
             a {
                 text-decoration: none;
-                color: var(--color)
+                color: var(--color);
+                font-size: var(--fs-larger);
+                width: 100%;
             }
         </style>
     </head>
     <body>
-    {{template "icons"}}
     {{$sharesFiles := .SharesFiles}}
     {{range $share := .Shares}}
-        <details open>
-            <summary>{{template "plus-icon"}}<h1>{{$share}}</h1></summary>
+        <section>
+            <h1>{{$share}}</h1>
             <ul>
                 {{$files := index $sharesFiles $share}}
                 {{range $file := $files}}
                     <li><a href="/file?dir={{$share}}&base={{$file}}">{{$file}}</a></li>
                 {{end}}
             </ul>
-        </details>
+        </section>
         </body>
         </html>
     {{end}}
