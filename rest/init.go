@@ -64,6 +64,7 @@ func formatFilename(name string) template.HTML {
 }
 
 func formatShare(name string) template.HTML {
+	name = strings.TrimSuffix(name, "/")
 	parts := strings.Split(name, "/")
 	return template.HTML(strings.Join(parts, "<span class='subtle'> / </span>"))
 }
