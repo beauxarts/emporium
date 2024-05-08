@@ -2,10 +2,15 @@ package rest
 
 import (
 	"embed"
+	"github.com/beauxarts/emporium/data"
+	"github.com/beauxarts/emporium/paths"
+	"github.com/boggydigital/kvas"
+	"github.com/boggydigital/pasu"
 	"html/template"
 )
 
 var (
+	rdx  kvas.ReadableRedux
 	tmpl *template.Template
 	//go:embed "templates/*.gohtml"
 	templates embed.FS
@@ -13,22 +18,14 @@ var (
 
 func Init() error {
 
-	//metadataDir, err := pasu.GetAbsDir(paths.Metadata)
-	//if err != nil {
-	//	return err
-	//}
+	metadataDir, err := pasu.GetAbsDir(paths.Metadata)
+	if err != nil {
+		return err
+	}
 
-	//if rdx, err = kvas.NewReduxReader(metadataDir, data.AllProperties()...); err != nil {
-	//	return err
-	//}
-
-	//if progressRdx, err = kvas.NewReduxWriter(metadataDir,
-	//	data.VideoProgressProperty,
-	//	data.VideoEndedProperty,
-	//	data.PlaylistNewVideosProperty,
-	//); err != nil {
-	//	return err
-	//}
+	if rdx, err = kvas.NewReduxReader(metadataDir, data.AllProperties()...); err != nil {
+		return err
+	}
 
 	tmpl = template.Must(
 		template.

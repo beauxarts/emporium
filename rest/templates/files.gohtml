@@ -1,0 +1,65 @@
+{{define "files"}}
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset='UTF-8'>
+        <link rel='icon'
+              href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>'
+              type='image/svg+xml'/>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <meta name='color-scheme' content='dark light'>
+        <title>Emporium</title>
+        {{template "css-base-themes"}}
+        <style>
+            body {
+                font-family: sans-serif;
+                margin: var(--large);
+                margin-block-start: var(--normal);
+                container-type: inline-size;
+
+            }
+
+            summary {
+                cursor: pointer;
+            }
+
+            h1 {
+                font-size: var(--fs-normal);
+            }
+
+            ul {
+                list-style: none;
+                padding-inline-start: 0;
+                margin-inline-start: var(--normal);
+                display: flex;
+                flex-direction: column;
+                gap: var(--normal);
+            }
+
+            details {
+                content-visibility: auto;
+            }
+
+            a {
+                text-decoration: none;
+                color: var(--color)
+            }
+        </style>
+    </head>
+    <body>
+    {{template "icons"}}
+    {{$sharesFiles := .SharesFiles}}
+    {{range $share := .Shares}}
+        <details open>
+            <summary>{{template "plus-icon"}}<h1>{{$share}}</h1></summary>
+            <ul>
+                {{$files := index $sharesFiles $share}}
+                {{range $file := $files}}
+                    <li><a href="/file?dir={{$share}}&base={{$file}}">{{$file}}</a></li>
+                {{end}}
+            </ul>
+        </details>
+        </body>
+        </html>
+    {{end}}
+{{end}}

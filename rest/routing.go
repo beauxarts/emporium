@@ -12,8 +12,10 @@ var (
 func HandleFuncs() {
 
 	patternHandlers := map[string]http.Handler{
+		"GET /browse": Log(http.HandlerFunc(GetBrowse)),
+		"GET /file":   Log(http.HandlerFunc(GetFile)),
 
-		"GET /": Log(http.NotFoundHandler()),
+		"GET /": Log(http.RedirectHandler("/", http.StatusPermanentRedirect)),
 	}
 
 	for p, h := range patternHandlers {
