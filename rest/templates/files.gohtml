@@ -53,17 +53,21 @@
                 font-size: var(--fs-larger);
                 width: 100%;
             }
+
+            .subtle {
+                color: var(--subtle-color)
+            }
         </style>
     </head>
     <body>
     {{$sharesFiles := .SharesFiles}}
     {{range $share := .Shares}}
         <section>
-            <h1>{{$share}}</h1>
+            <h1>{{formatShare $share}}</h1>
             <ul>
                 {{$files := index $sharesFiles $share}}
                 {{range $file := $files}}
-                    <li><a href="/file?dir={{$share}}&base={{$file}}">{{$file}}</a></li>
+                    <li><a href="/file?dir={{$share}}&base={{$file}}">{{formatFilename $file}}</a></li>
                 {{end}}
             </ul>
         </section>

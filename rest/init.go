@@ -9,6 +9,8 @@ import (
 	"github.com/boggydigital/middleware"
 	"github.com/boggydigital/pasu"
 	"html/template"
+	"path/filepath"
+	"strings"
 )
 
 const DefaultRole = "default"
@@ -42,7 +44,26 @@ func Init() error {
 	tmpl = template.Must(
 		template.
 			New("").
+			Funcs(FuncMap()).
 			ParseFS(templates, "templates/*.gohtml"))
 
 	return nil
+}
+
+func FuncMap() template.FuncMap {
+	return template.FuncMap{
+		"formatFilename": formatFilename,
+		"formatShare":    formatShare,
+	}
+}
+
+func formatFilename(name string) template.HTML {
+	ext := filepath.Ext(name)
+	fnse := strings.TrimSuffix(name, ext)
+	return template.HTML("<span>" + fnse + "</span><span class='subtle'>" + ext + "</span>")
+}
+
+func formatShare(name string) template.HTML {
+	parts := strings.Split(name, "/")
+	return template.HTML(strings.Join(parts, "<span class='subtle'> / </span>"))
 }
