@@ -1,0 +1,6 @@
+backups
+    /Volumes/appdata/emporium/backups
+share
+    /Volumes/appdata/emporium/share
+metadata
+    /Volumes/appdata/emporium/metadata
