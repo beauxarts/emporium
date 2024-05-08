@@ -8,6 +8,8 @@
 
 backup
 
+scan
+
 serve
     port$*
     stderr$
