@@ -16,6 +16,12 @@ func ServeHandler(u *url.URL) error {
 		return err
 	}
 
+	username := u.Query().Get("username")
+	password := u.Query().Get("password")
+
+	rest.SetUsername(rest.DefaultRole, username)
+	rest.SetPassword(rest.DefaultRole, password)
+
 	stderr := u.Query().Has("stderr")
 
 	return Serve(port, stderr)

@@ -13,5 +13,7 @@ scan
 serve
     port$*
     stderr$
+    username$
+    password$
 
 version
