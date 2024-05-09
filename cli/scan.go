@@ -56,7 +56,12 @@ func Scan() error {
 		return sa.EndWithError(err)
 	}
 
-	if err := rdx.BatchReplaceValues(data.SharesFilesProperty, dirFiles); err != nil {
+	// clear redux before adding new values
+	if err := rdx.CutKeys(data.SharesFilesProperty, rdx.Keys(data.SharesFilesProperty)...); err != nil {
+		return sa.EndWithError(err)
+	}
+
+	if err := rdx.BatchAddValues(data.SharesFilesProperty, dirFiles); err != nil {
 		return sa.EndWithError(err)
 	}
 
