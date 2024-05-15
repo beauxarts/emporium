@@ -1,18 +1,18 @@
 package paths
 
 import (
-	"github.com/boggydigital/pasu"
+	"github.com/boggydigital/pathways"
 )
 
 const DefaultEmporiumRootDir = "/usr/share/emporium"
 
 const (
-	Backups  pasu.AbsDir = "backups"
-	Shares   pasu.AbsDir = "shares"
-	Metadata pasu.AbsDir = "metadata"
+	Backups  pathways.AbsDir = "backups"
+	Shares   pathways.AbsDir = "shares"
+	Metadata pathways.AbsDir = "metadata"
 )
 
-var AllAbsDirs = []pasu.AbsDir{
+var AllAbsDirs = []pathways.AbsDir{
 	Backups,
 	Shares,
 	Metadata,

@@ -7,7 +7,7 @@ import (
 	"github.com/beauxarts/emporium/paths"
 	"github.com/boggydigital/clo"
 	"github.com/boggydigital/nod"
-	"github.com/boggydigital/pasu"
+	"github.com/boggydigital/pathways"
 	"os"
 )
 
@@ -28,7 +28,7 @@ func main() {
 	ea := nod.Begin("emporium is serving your sharing needs")
 	defer ea.End()
 
-	if err := pasu.Setup(dirOverridesFilename,
+	if err := pathways.Setup(dirOverridesFilename,
 		paths.DefaultEmporiumRootDir,
 		nil,
 		paths.AllAbsDirs...); err != nil {

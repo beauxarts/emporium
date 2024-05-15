@@ -5,7 +5,7 @@ import (
 	"github.com/beauxarts/emporium/paths"
 	"github.com/boggydigital/kvas"
 	"github.com/boggydigital/nod"
-	"github.com/boggydigital/pasu"
+	"github.com/boggydigital/pathways"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -20,7 +20,7 @@ func Scan() error {
 	sa := nod.Begin("scanning shares...")
 	defer sa.End()
 
-	metadataDir, err := pasu.GetAbsDir(paths.Metadata)
+	metadataDir, err := pathways.GetAbsDir(paths.Metadata)
 	if err != nil {
 		return sa.EndWithError(err)
 	}
@@ -30,7 +30,7 @@ func Scan() error {
 		return sa.EndWithError(err)
 	}
 
-	shares, err := pasu.GetAbsDir(paths.Shares)
+	shares, err := pathways.GetAbsDir(paths.Shares)
 	if err != nil {
 		return sa.EndWithError(err)
 	}

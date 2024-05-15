@@ -7,7 +7,7 @@ import (
 	"github.com/beauxarts/emporium/paths"
 	"github.com/boggydigital/kvas"
 	"github.com/boggydigital/middleware"
-	"github.com/boggydigital/pasu"
+	"github.com/boggydigital/pathways"
 	"html/template"
 	"path/filepath"
 	"strings"
@@ -32,7 +32,7 @@ func SetPassword(role, p string) {
 
 func Init() error {
 
-	metadataDir, err := pasu.GetAbsDir(paths.Metadata)
+	metadataDir, err := pathways.GetAbsDir(paths.Metadata)
 	if err != nil {
 		return err
 	}

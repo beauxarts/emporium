@@ -3,7 +3,7 @@ package rest
 import (
 	"github.com/beauxarts/emporium/paths"
 	"github.com/boggydigital/nod"
-	"github.com/boggydigital/pasu"
+	"github.com/boggydigital/pathways"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -16,7 +16,7 @@ func GetFile(w http.ResponseWriter, r *http.Request) {
 	dir := r.URL.Query().Get("dir")
 	base := r.URL.Query().Get("base")
 
-	sharesDir, err := pasu.GetAbsDir(paths.Shares)
+	sharesDir, err := pathways.GetAbsDir(paths.Shares)
 	if err != nil {
 		http.Error(w, nod.Error(err).Error(), http.StatusInternalServerError)
 	}
