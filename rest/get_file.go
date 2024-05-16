@@ -16,6 +16,9 @@ func GetFile(w http.ResponseWriter, r *http.Request) {
 	dir := r.URL.Query().Get("dir")
 	base := r.URL.Query().Get("base")
 
+	// make sure we're working with file and not path
+	base = filepath.Base(base)
+
 	sharesDir, err := pathways.GetAbsDir(paths.Shares)
 	if err != nil {
 		http.Error(w, nod.Error(err).Error(), http.StatusInternalServerError)
