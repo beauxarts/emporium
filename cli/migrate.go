@@ -26,7 +26,7 @@ func Migrate() error {
 		return ma.EndWithError(err)
 	}
 
-	if err := kevlar.Migrate(amd, kevlar.GobExt); err != nil {
+	if err := kevlar.Migrate(amd); err != nil {
 		return ma.EndWithError(err)
 	}
 

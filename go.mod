@@ -5,7 +5,7 @@ go 1.22.5
 require (
 	github.com/boggydigital/backups v0.1.3
 	github.com/boggydigital/clo v1.0.4
-	github.com/boggydigital/kevlar v0.5.4
+	github.com/boggydigital/kevlar v0.5.5
 	github.com/boggydigital/middleware v0.1.16
 	github.com/boggydigital/nod v0.1.21
 	github.com/boggydigital/pathways v0.1.14
