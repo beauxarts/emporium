@@ -8,6 +8,8 @@
 
 backup
 
+migrate
+
 scan
 
 serve

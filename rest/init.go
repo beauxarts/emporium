@@ -5,7 +5,7 @@ import (
 	"embed"
 	"github.com/beauxarts/emporium/data"
 	"github.com/beauxarts/emporium/paths"
-	"github.com/boggydigital/kvas"
+	"github.com/boggydigital/kevlar"
 	"github.com/boggydigital/middleware"
 	"github.com/boggydigital/pathways"
 	"html/template"
@@ -16,7 +16,7 @@ import (
 const DefaultRole = "default"
 
 var (
-	rdx  kvas.ReadableRedux
+	rdx  kevlar.ReadableRedux
 	tmpl *template.Template
 	//go:embed "templates/*.gohtml"
 	templates embed.FS
@@ -37,7 +37,7 @@ func Init() error {
 		return err
 	}
 
-	if rdx, err = kvas.NewReduxReader(metadataDir, data.AllProperties()...); err != nil {
+	if rdx, err = kevlar.NewReduxReader(metadataDir, data.AllProperties()...); err != nil {
 		return err
 	}
 
