@@ -3,9 +3,9 @@ package cli
 import (
 	"github.com/beauxarts/emporium/data"
 	"github.com/beauxarts/emporium/paths"
-	"github.com/boggydigital/kevlar"
 	"github.com/boggydigital/nod"
 	"github.com/boggydigital/pathways"
+	"github.com/boggydigital/redux"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -25,7 +25,7 @@ func Scan() error {
 		return sa.EndWithError(err)
 	}
 
-	rdx, err := kevlar.NewReduxWriter(metadataDir, data.AllProperties()...)
+	rdx, err := redux.NewWriter(metadataDir, data.AllProperties()...)
 	if err != nil {
 		return sa.EndWithError(err)
 	}

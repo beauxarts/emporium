@@ -2,7 +2,7 @@ package view_models
 
 import (
 	"github.com/beauxarts/emporium/data"
-	"github.com/boggydigital/kevlar"
+	"github.com/boggydigital/redux"
 	"sort"
 )
 
@@ -11,7 +11,7 @@ type BrowseViewModel struct {
 	SharesFiles map[string][]string
 }
 
-func NewBrowseViewModel(rdx kevlar.ReadableRedux) *BrowseViewModel {
+func NewBrowseViewModel(rdx redux.Readable) *BrowseViewModel {
 	shares := rdx.Keys(data.SharesFilesProperty)
 	sort.Strings(shares)
 
