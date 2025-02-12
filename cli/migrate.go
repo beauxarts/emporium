@@ -15,22 +15,20 @@ func MigrateHandler(_ *url.URL) error {
 func Migrate() error {
 
 	ma := nod.Begin("migrating data...")
-	defer ma.End()
+	defer ma.Done()
 
 	if err := Backup(); err != nil {
-		return ma.EndWithError(err)
+		return err
 	}
 
 	amd, err := pathways.GetAbsDir(paths.Metadata)
 	if err != nil {
-		return ma.EndWithError(err)
+		return err
 	}
 
-	if err := kevlar.Migrate(amd); err != nil {
-		return ma.EndWithError(err)
+	if err = kevlar.Migrate(amd); err != nil {
+		return err
 	}
-
-	ma.EndWithResult("done")
 
 	return nil
 }

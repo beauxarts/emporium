@@ -8,6 +8,7 @@ import (
 	"github.com/boggydigital/clo"
 	"github.com/boggydigital/nod"
 	"github.com/boggydigital/pathways"
+	"log"
 	"os"
 )
 
@@ -26,13 +27,13 @@ func main() {
 	nod.EnableStdOutPresenter()
 
 	ea := nod.Begin("emporium is serving your sharing needs")
-	defer ea.End()
+	defer ea.Done()
 
 	if err := pathways.Setup(dirOverridesFilename,
 		paths.DefaultEmporiumRootDir,
 		nil,
 		paths.AllAbsDirs...); err != nil {
-		_ = ea.EndWithError(err)
+		log.Println(err.Error())
 		os.Exit(1)
 	}
 
@@ -42,8 +43,8 @@ func main() {
 		nil)
 
 	if err != nil {
-		_ = ea.EndWithError(err)
-		os.Exit(1)
+		log.Println(err.Error())
+		os.Exit(2)
 	}
 
 	clo.HandleFuncs(map[string]clo.Handler{
@@ -55,13 +56,13 @@ func main() {
 	})
 
 	if err := defs.AssertCommandsHaveHandlers(); err != nil {
-		_ = ea.EndWithError(err)
-		os.Exit(1)
+		log.Println(err.Error())
+		os.Exit(3)
 	}
 
 	if err := defs.Serve(os.Args[1:]); err != nil {
-		_ = ea.EndWithError(err)
-		os.Exit(1)
+		log.Println(err.Error())
+		os.Exit(4)
 	}
 
 }

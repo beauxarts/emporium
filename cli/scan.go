@@ -9,6 +9,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"slices"
 )
 
 func ScanHandler(u *url.URL) error {
@@ -18,21 +19,21 @@ func ScanHandler(u *url.URL) error {
 func Scan() error {
 
 	sa := nod.Begin("scanning shares...")
-	defer sa.End()
+	defer sa.Done()
 
 	metadataDir, err := pathways.GetAbsDir(paths.Metadata)
 	if err != nil {
-		return sa.EndWithError(err)
+		return err
 	}
 
 	rdx, err := redux.NewWriter(metadataDir, data.AllProperties()...)
 	if err != nil {
-		return sa.EndWithError(err)
+		return err
 	}
 
 	shares, err := pathways.GetAbsDir(paths.Shares)
 	if err != nil {
-		return sa.EndWithError(err)
+		return err
 	}
 
 	dirFiles := make(map[string][]string)
@@ -53,19 +54,17 @@ func Scan() error {
 			}
 			return nil
 		}); err != nil {
-		return sa.EndWithError(err)
+		return err
 	}
 
 	// clear redux before adding new values
-	if err := rdx.CutKeys(data.SharesFilesProperty, rdx.Keys(data.SharesFilesProperty)...); err != nil {
-		return sa.EndWithError(err)
+	if err = rdx.CutKeys(data.SharesFilesProperty, slices.Collect(rdx.Keys(data.SharesFilesProperty))...); err != nil {
+		return err
 	}
 
-	if err := rdx.BatchAddValues(data.SharesFilesProperty, dirFiles); err != nil {
-		return sa.EndWithError(err)
+	if err = rdx.BatchAddValues(data.SharesFilesProperty, dirFiles); err != nil {
+		return err
 	}
-
-	sa.EndWithResult("done")
 
 	return nil
 }
