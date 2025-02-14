@@ -1,6 +1,6 @@
 module github.com/beauxarts/emporium
 
-go 1.23.6
+go 1.24.0
 
 require (
 	github.com/boggydigital/backups v0.1.6
@@ -9,7 +9,7 @@ require (
 	github.com/boggydigital/middleware v0.1.17
 	github.com/boggydigital/nod v0.1.25
 	github.com/boggydigital/pathways v0.1.15
-	github.com/boggydigital/redux v0.1.3
+	github.com/boggydigital/redux v0.1.4
 )
 
 require (
