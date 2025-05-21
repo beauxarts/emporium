@@ -2,24 +2,17 @@ package rest
 
 import (
 	"crypto/sha256"
-	"embed"
 	"github.com/beauxarts/emporium/data"
 	"github.com/beauxarts/emporium/paths"
 	"github.com/boggydigital/middleware"
 	"github.com/boggydigital/pathways"
 	"github.com/boggydigital/redux"
-	"html/template"
-	"path/filepath"
-	"strings"
 )
 
 const DefaultRole = "default"
 
 var (
-	rdx  redux.Readable
-	tmpl *template.Template
-	//go:embed "templates/*.gohtml"
-	templates embed.FS
+	rdx redux.Readable
 )
 
 func SetUsername(role, u string) {
@@ -41,30 +34,5 @@ func Init() error {
 		return err
 	}
 
-	tmpl = template.Must(
-		template.
-			New("").
-			Funcs(FuncMap()).
-			ParseFS(templates, "templates/*.gohtml"))
-
 	return nil
-}
-
-func FuncMap() template.FuncMap {
-	return template.FuncMap{
-		"formatFilename": formatFilename,
-		"formatShare":    formatShare,
-	}
-}
-
-func formatFilename(name string) template.HTML {
-	ext := filepath.Ext(name)
-	fnse := strings.TrimSuffix(name, ext)
-	return template.HTML("<span>" + fnse + "</span><span class='subtle'>" + ext + "</span>")
-}
-
-func formatShare(name string) template.HTML {
-	name = strings.TrimSuffix(name, "/")
-	parts := strings.Split(name, "/")
-	return template.HTML(strings.Join(parts, "<span class='subtle'> / </span>"))
 }
