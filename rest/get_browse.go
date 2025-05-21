@@ -74,6 +74,10 @@ func GetBrowse(w http.ResponseWriter, r *http.Request) {
 				ext := filepath.Ext(filename)
 				fse := strings.TrimSuffix(filename, ext)
 
+				if strings.HasPrefix(fse, trimmedSha) {
+					fse = strings.Replace(fse, trimmedSha+" - ", "", 1)
+				}
+
 				linkFilename := compton.Fspan(p, fse).Padding(size.Unset)
 				linkExt := compton.Fspan(p, ext).ForegroundColor(color.Gray).Padding(size.Unset)
 
