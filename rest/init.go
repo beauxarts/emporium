@@ -3,7 +3,6 @@ package rest
 import (
 	"crypto/sha256"
 	"github.com/beauxarts/emporium/data"
-	"github.com/beauxarts/emporium/paths"
 	"github.com/boggydigital/middleware"
 	"github.com/boggydigital/pathways"
 	"github.com/boggydigital/redux"
@@ -25,7 +24,7 @@ func SetPassword(role, p string) {
 
 func Init() error {
 
-	metadataDir, err := pathways.GetAbsDir(paths.Metadata)
+	metadataDir, err := pathways.GetAbsDir(data.Metadata)
 	if err != nil {
 		return err
 	}

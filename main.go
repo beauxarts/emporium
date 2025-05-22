@@ -4,7 +4,7 @@ import (
 	"bytes"
 	_ "embed"
 	"github.com/beauxarts/emporium/cli"
-	"github.com/beauxarts/emporium/paths"
+	"github.com/beauxarts/emporium/data"
 	"github.com/boggydigital/clo"
 	"github.com/boggydigital/nod"
 	"github.com/boggydigital/pathways"
@@ -30,9 +30,9 @@ func main() {
 	defer ea.Done()
 
 	if err := pathways.Setup(dirOverridesFilename,
-		paths.DefaultEmporiumRootDir,
+		data.DefaultEmporiumRootDir,
 		nil,
-		paths.AllAbsDirs...); err != nil {
+		data.AllAbsDirs...); err != nil {
 		log.Println(err.Error())
 		os.Exit(1)
 	}

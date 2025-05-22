@@ -1,7 +1,7 @@
 package cli
 
 import (
-	"github.com/beauxarts/emporium/paths"
+	"github.com/beauxarts/emporium/data"
 	"github.com/boggydigital/backups"
 	"github.com/boggydigital/nod"
 	"github.com/boggydigital/pathways"
@@ -18,12 +18,12 @@ func Backup() error {
 	ea := nod.NewProgress("backing up metadata...")
 	defer ea.Done()
 
-	amp, err := pathways.GetAbsDir(paths.Metadata)
+	amp, err := pathways.GetAbsDir(data.Metadata)
 	if err != nil {
 		return err
 	}
 
-	abp, err := pathways.GetAbsDir(paths.Backups)
+	abp, err := pathways.GetAbsDir(data.Backups)
 	if err != nil {
 		return err
 	}

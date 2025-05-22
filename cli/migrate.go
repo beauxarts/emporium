@@ -1,7 +1,7 @@
 package cli
 
 import (
-	"github.com/beauxarts/emporium/paths"
+	"github.com/beauxarts/emporium/data"
 	"github.com/boggydigital/kevlar"
 	"github.com/boggydigital/nod"
 	"github.com/boggydigital/pathways"
@@ -21,7 +21,7 @@ func Migrate() error {
 		return err
 	}
 
-	amd, err := pathways.GetAbsDir(paths.Metadata)
+	amd, err := pathways.GetAbsDir(data.Metadata)
 	if err != nil {
 		return err
 	}

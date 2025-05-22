@@ -2,7 +2,6 @@ package cli
 
 import (
 	"github.com/beauxarts/emporium/data"
-	"github.com/beauxarts/emporium/paths"
 	"github.com/boggydigital/nod"
 	"github.com/boggydigital/pathways"
 	"github.com/boggydigital/redux"
@@ -21,7 +20,7 @@ func Scan() error {
 	sa := nod.Begin("scanning shares...")
 	defer sa.Done()
 
-	metadataDir, err := pathways.GetAbsDir(paths.Metadata)
+	metadataDir, err := pathways.GetAbsDir(data.Metadata)
 	if err != nil {
 		return err
 	}
@@ -31,7 +30,7 @@ func Scan() error {
 		return err
 	}
 
-	shares, err := pathways.GetAbsDir(paths.Shares)
+	shares, err := pathways.GetAbsDir(data.Shares)
 	if err != nil {
 		return err
 	}
