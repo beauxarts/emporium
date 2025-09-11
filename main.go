@@ -3,13 +3,14 @@ package main
 import (
 	"bytes"
 	_ "embed"
+	"log"
+	"os"
+
 	"github.com/beauxarts/emporium/cli"
 	"github.com/beauxarts/emporium/data"
 	"github.com/boggydigital/clo"
 	"github.com/boggydigital/nod"
 	"github.com/boggydigital/pathways"
-	"log"
-	"os"
 )
 
 var (
@@ -49,7 +50,6 @@ func main() {
 
 	clo.HandleFuncs(map[string]clo.Handler{
 		"backup":  cli.BackupHandler,
-		"migrate": cli.MigrateHandler,
 		"scan":    cli.ScanHandler,
 		"serve":   cli.ServeHandler,
 		"version": cli.VersionHandler,
@@ -60,7 +60,7 @@ func main() {
 		os.Exit(3)
 	}
 
-	if err := defs.Serve(os.Args[1:]); err != nil {
+	if err := defs.ParseServe(os.Args[1:]); err != nil {
 		log.Println(err.Error())
 		os.Exit(4)
 	}
