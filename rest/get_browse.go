@@ -1,15 +1,18 @@
 package rest
 
 import (
-	"github.com/beauxarts/emporium/data"
-	"github.com/boggydigital/compton"
-	"github.com/boggydigital/compton/consts/color"
-	"github.com/boggydigital/compton/consts/direction"
-	"github.com/boggydigital/compton/consts/size"
 	"net/http"
 	"path/filepath"
 	"slices"
 	"strings"
+
+	"github.com/beauxarts/emporium/data"
+	"github.com/boggydigital/busan"
+	"github.com/boggydigital/compton"
+	"github.com/boggydigital/compton/consts/align"
+	"github.com/boggydigital/compton/consts/color"
+	"github.com/boggydigital/compton/consts/direction"
+	"github.com/boggydigital/compton/consts/size"
 )
 
 func GetBrowse(w http.ResponseWriter, r *http.Request) {
@@ -37,6 +40,7 @@ func GetBrowse(w http.ResponseWriter, r *http.Request) {
 		trimmedSha := strings.TrimSuffix(sha, "/")
 
 		shaHeading := compton.Heading(1)
+		var headingParts []string
 
 		if shaParts := strings.Split(trimmedSha, "/"); len(shaParts) > 1 {
 
@@ -49,12 +53,26 @@ func GetBrowse(w http.ResponseWriter, r *http.Request) {
 				if ii != len(shaParts)-1 {
 					shaPartsRow.Append(compton.Fspan(p, "/").ForegroundColor(color.Gray))
 				}
+
+				headingParts = append(headingParts, part)
 			}
 
 		} else {
 			shaHeading.Append(compton.Text(trimmedSha))
+			headingParts = append(headingParts, trimmedSha)
 		}
-		pageStack.Append(shaHeading)
+
+		headingId := busan.Sanitize(strings.Join(headingParts, " "))
+		shaHeading.SetId(headingId)
+		shaHeadingLink := compton.A("#" + headingId)
+		shaHeadingLink.Append(compton.Fspan(p, "#").
+			ForegroundColor(color.Gray).
+			FontSize(size.XXLarge))
+
+		lineStack := compton.FlexItems(p, direction.Row).AlignContent(align.Center)
+		lineStack.Append(shaHeading, shaHeadingLink)
+
+		pageStack.Append(lineStack)
 
 		filesStack := compton.FlexItems(p, direction.Column)
 		pageStack.Append(filesStack)
