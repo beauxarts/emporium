@@ -17,6 +17,6 @@ require (
 	github.com/boggydigital/issa v0.1.23 // indirect
 	github.com/boggydigital/kevlar v0.6.9 // indirect
 	github.com/boggydigital/wits v0.2.3 // indirect
-	golang.org/x/image v0.34.0 // indirect
+	golang.org/x/image v0.38.0 // indirect
 	golang.org/x/net v0.48.0 // indirect
 )
