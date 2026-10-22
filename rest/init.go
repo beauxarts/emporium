@@ -2,9 +2,10 @@ package rest
 
 import (
 	"crypto/sha256"
+
 	"github.com/beauxarts/emporium/data"
+	"github.com/boggydigital/camino"
 	"github.com/boggydigital/middleware"
-	"github.com/boggydigital/pathways"
 	"github.com/boggydigital/redux"
 )
 
@@ -24,11 +25,9 @@ func SetPassword(role, p string) {
 
 func Init() error {
 
-	metadataDir, err := pathways.GetAbsDir(data.Metadata)
-	if err != nil {
-		return err
-	}
+	metadataDir := camino.GetAbs(data.Metadata)
 
+	var err error
 	if rdx, err = redux.NewReader(metadataDir, data.AllProperties()...); err != nil {
 		return err
 	}

@@ -1,14 +1,15 @@
 package cli
 
 import (
-	"github.com/beauxarts/emporium/data"
-	"github.com/boggydigital/nod"
-	"github.com/boggydigital/pathways"
-	"github.com/boggydigital/redux"
 	"net/url"
 	"os"
 	"path/filepath"
 	"slices"
+
+	"github.com/beauxarts/emporium/data"
+	"github.com/boggydigital/camino"
+	"github.com/boggydigital/nod"
+	"github.com/boggydigital/redux"
 )
 
 func ScanHandler(u *url.URL) error {
@@ -20,20 +21,14 @@ func Scan() error {
 	sa := nod.Begin("scanning shares...")
 	defer sa.Done()
 
-	metadataDir, err := pathways.GetAbsDir(data.Metadata)
-	if err != nil {
-		return err
-	}
+	metadataDir := camino.GetAbs(data.Metadata)
 
 	rdx, err := redux.NewWriter(metadataDir, data.AllProperties()...)
 	if err != nil {
 		return err
 	}
 
-	shares, err := pathways.GetAbsDir(data.Shares)
-	if err != nil {
-		return err
-	}
+	shares := camino.GetAbs(data.Shares)
 
 	dirFiles := make(map[string][]string)
 

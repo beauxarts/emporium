@@ -1,12 +1,13 @@
 package rest
 
 import (
-	"github.com/beauxarts/emporium/data"
-	"github.com/boggydigital/nod"
-	"github.com/boggydigital/pathways"
 	"net/http"
 	"os"
 	"path/filepath"
+
+	"github.com/beauxarts/emporium/data"
+	"github.com/boggydigital/camino"
+	"github.com/boggydigital/nod"
 )
 
 func GetFile(w http.ResponseWriter, r *http.Request) {
@@ -19,13 +20,10 @@ func GetFile(w http.ResponseWriter, r *http.Request) {
 	// make sure we're working with file and not path
 	base = filepath.Base(base)
 
-	sharesDir, err := pathways.GetAbsDir(data.Shares)
-	if err != nil {
-		http.Error(w, nod.Error(err).Error(), http.StatusInternalServerError)
-	}
+	sharesDir := camino.GetAbs(data.Shares)
 
 	absLocalFilePath := filepath.Join(sharesDir, dir, base)
-	if _, err = os.Stat(absLocalFilePath); err == nil {
+	if _, err := os.Stat(absLocalFilePath); err == nil {
 		_, filename := filepath.Split(absLocalFilePath)
 		w.Header().Set("Cache-Control", "max-age=31536000")
 		w.Header().Set("Content-Disposition", "attachment; filename=\""+filename+"\"")

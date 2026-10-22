@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/beauxarts/emporium/data"
-	"github.com/boggydigital/busan"
+	"github.com/boggydigital/camino"
 	"github.com/boggydigital/compton"
 	"github.com/boggydigital/compton/consts/align"
 	"github.com/boggydigital/compton/consts/color"
@@ -62,7 +62,7 @@ func GetBrowse(w http.ResponseWriter, r *http.Request) {
 			headingParts = append(headingParts, trimmedSha)
 		}
 
-		headingId := busan.Sanitize(strings.Join(headingParts, " "))
+		headingId := camino.Sanitize(strings.Join(headingParts, " "))
 		shaHeading.SetId(headingId)
 		shaHeadingLink := compton.A("#" + headingId)
 		shaHeadingLink.Append(compton.Fspan(p, "#").
